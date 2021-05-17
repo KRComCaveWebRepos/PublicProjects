@@ -1,0 +1,31 @@
+﻿@inject IEnumerable<IAbstractGenerator> generatorServices
+
+@{
+    ViewData["Title"] = "View";}
+<h1>View Injection</h1>
+
+@using (Html.BeginForm("Index", "ViewInjection"))
+{
+
+    @Html.DropDownList("GeneratorType", new SelectList(generatorServices.Select(x => x.GetType().Name).ToArray()), "select generator");
+    <input type="submit" value="get" formmethod="get" />
+    <input type="submit" value="post" formmethod="post" />
+}
+
+
+@{
+    var generator = generatorServices.Where(x => x.GetType().Name.Equals(this.ViewBag.GeneratorType)).FirstOrDefault();
+
+    if (generator != null)
+    {
+        <h1>@generator.GetType().Name created</h1>
+        <p>@generator.CreateAnimal().Status</p>
+        <p>@generator.CreatePlant().Status</p>
+        <p>@generator.CreateUnderground().Status</p>
+    }
+
+}
+
+
+
+

@@ -1,0 +1,26 @@
+﻿@model GeneratorData
+@{
+    ViewData["Title"] = "Constructor";
+}
+
+<h1>Constructor Injection</h1>
+
+
+@using (Html.BeginForm("Index", "ConstructorInjection"))
+{
+    @Html.DropDownList("GeneratorType", Model.GeneratorList, "select generator");
+
+    <input type="submit" value="get" formmethod="get" />
+    <input type="submit" value="post" formmethod="post" />
+
+}
+
+@if (Model.Generator != null)
+{
+
+    <h1>@Model.Generator.GetType().Name created</h1>
+    <p>@Model.Generator.CreateAnimal().Status</p>
+    <p>@Model.Generator.CreatePlant().Status</p>
+    <p>@Model.Generator.CreateUnderground().Status</p>
+
+}
